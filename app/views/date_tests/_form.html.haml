@@ -1,0 +1,18 @@
+= form_for @date_test do |f|
+  - if @date_test.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@date_test.errors.count, "error")} prohibited this date_test from being saved:"
+      %ul
+        - @date_test.errors.full_messages.each do |msg|
+          %li= msg
+  .col-xs-12
+    .field
+      = f.label :name, "Дата"
+      = f.text_field :name, class: 'form-control'
+    .field
+      = f.label :expected, "Ожидаемый результат"
+      = f.text_field :expected, class: 'form-control'
+  .col-xs-12.text-right
+    %hr/
+    .actions
+      = f.submit 'Сохранить', class: 'btn btn-info'

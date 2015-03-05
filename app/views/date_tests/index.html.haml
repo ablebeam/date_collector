@@ -1,0 +1,40 @@
+%h1.text-center HumanDateRange
+.jumbotron
+  %p Довольно часто приходится разбирать даты, написанные в произвольном формате.
+  %p Создать универсальный парсер всевозможных форматов дат, которые может написать человек - тяжело.
+  %p
+    Но каждый может добавить тот формат даты, с которым он столкнулся.
+    Этот формат будет добавлен в тесты и, вероятно, обработан.
+    Возможно, кодом не лучшего качества, местами похожим на костыли, но работающим и проверенным.
+
+%h2 Даты
+- if @date_tests.present?
+  .row
+    .col-xs-12
+      .table-responsive
+        %table.table-hover.table-stripped.col-xs-12
+          %thead
+            %tr
+              %th
+              %th Входная дата
+              %th Ожидаемый результат
+              %th
+              %th
+
+          %tbody
+            - @date_tests.each do |date_test|
+              %tr
+                %td.text-center= status_for date_test.ready?
+                %td= date_test.name
+                %td= date_test.expected
+                %td= link_to 'Изменить', edit_date_test_path(date_test)
+                %td= link_to 'Удалить', date_test, :method => :delete, :data => { :confirm => 'Точно?' }
+- else
+  .row
+    .col-xs-12
+      %p Форматы дат остутствуют. Добавьте первый.
+
+.row
+  %hr/
+  .col-xs-12.text-right
+    = link_to 'Добавить', new_date_test_path, class: 'btn btn-primary'
